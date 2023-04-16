@@ -1,7 +1,6 @@
 import express, { request, response } from 'express';
 import * as mongoose from 'mongoose';
 import { port } from "./config/index.js";
-
 import { DB_URI } from "./config/db.js";
 
 const app = express();
@@ -15,7 +14,6 @@ async function setDbConnection(DB_URI) {
                 .catch((err) => console.log('Connection error', err));
 
 }
-
 
 app.get('/',(request, response, error) =>{
  
