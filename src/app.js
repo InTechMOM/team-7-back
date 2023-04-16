@@ -1,23 +1,21 @@
 import express, { request, response } from 'express';
+import * as mongoose from 'mongoose';
 import { port } from "./config/index.js";
-import  mongoose from 'mongoose'
+
+import { DB_URI } from "./config/db.js";
 
 const app = express();
 
-mongoose.Promise = global.Promise
+setDbConnection(DB_URI);
 
+async function setDbConnection(DB_URI) {
 
-mongoose.connect('mongodb+srv://dev:ejlEOjy9ohZeMdI7@intechmom.pt69jaf.mongodb.net/?retryWrites=true&w=majority')
+  await mongoose.connect(DB_URI)
+                .then(() => console.log('Connection to DB successful'))
+                .catch((err) => console.log('Connection error', err));
 
-var db = mongoose.connection
+}
 
-db.on('error', (err)=>{
-  console.log('connection error', err)
-})
-
-db.once('open', ()=>{
-  console.log('Connection to DB successful')
-})
 
 app.get('/',(request, response, error) =>{
  
@@ -28,8 +26,12 @@ app.get('/',(request, response, error) =>{
 app.listen(port, (error)=>{
 
   if(error){
-    console.log('Server Error: Failed')
-    process.exit(1)
+    
+    console.log('Server Error: Failed');
+    
+    process.exit(1);
   }
+
   console.log(`Server listening in port ${port}`);
+
 })
