@@ -1,5 +1,11 @@
+import * as mongoose from 'mongoose';
+import { DB_URI } from "./index.js";
 
-export const DB_URI = process.env.DB_URI;
+export async function setDbConnection(){
+  await mongoose.connect(DB_URI)
+                .then(() => console.log('Connection to DB successful'))
+                .catch((err) => console.log('Connection error', err));
+}
 
 
 
