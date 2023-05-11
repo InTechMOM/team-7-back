@@ -1,6 +1,3 @@
-
-//crear funcion create user, paraguardar en la BD
-
 import validateNewUser from '../validation/validation.js';
 import User from '../../../models/users.js';
 
