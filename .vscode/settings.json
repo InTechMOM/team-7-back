@@ -3,5 +3,8 @@
   "editor.accessibilityPageSize": 16,
   "editor.fontSize": 16,
   "files.autoSave": "onFocusChange",
-  "editor.cursorStyle": "block"
+  "editor.cursorStyle": "block",
+  "cSpell.words": [
+    "tlds"
+  ]
 }
