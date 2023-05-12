@@ -4,6 +4,7 @@ import getUserByEmail from '../controllers/get.js';
 import getAllUser from '../controllers/get.js';
 import getUserById from '../controllers/get.js';
 import deleteUserById from '../controllers/delete.js';
+import putUser from '../controllers/put.js';
 
 const router = express.Router();
 
@@ -12,4 +13,6 @@ router.get('/users', getAllUser);
 router.get('/users/:email', getUserByEmail);
 router.get('/users/:id', getUserById);
 router.delete('/users/:id',deleteUserById);
+router.put('/users/:id',putUser);
+
 export default router;

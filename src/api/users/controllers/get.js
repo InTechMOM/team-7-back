@@ -1,6 +1,4 @@
-
 import User from '../../../models/users.js';
-
 
 const getUserByEmail = async (request, response) => {
   try{
