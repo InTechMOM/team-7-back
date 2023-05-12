@@ -1,5 +1,5 @@
 import express from 'express';
-import { port } from ''./config/index.js';
+import { port } from './config/index.js';
 import { setDbConnection } from './config/db.js';
 import router from './router.js';
 
