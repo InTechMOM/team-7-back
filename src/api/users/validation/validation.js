@@ -6,16 +6,30 @@ function validateNewUser(body){
         .min(3)
         .max(30)
         .required(),
-    lastname: Joi.string()
+    lastName: Joi.string()
         .min(3)
         .max(30)
         .required(),
     email: Joi.string()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net']}}),
+        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net']}})
+        .unique(),
     rol: Joi.string()
         .valid('student','teacher')
         .required(),
   });
   return schema.validate(body);
 }
-export default validateNewUser;
+function validateUpDateUser(body){
+    const schema = Joi.object({
+      name: Joi.string()
+          .min(3)
+          .max(30)
+          .required(),
+      lastName: Joi.string()
+          .min(3)
+          .max(30)
+          .required(),
+    });
+    return schema.validate(body);
+  }
+export { validateNewUser, validateUpDateUser};
