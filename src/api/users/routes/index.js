@@ -1,8 +1,6 @@
 import express from 'express';
 import createUser from '../controllers/post.js';
-import getUserByEmail from '../controllers/get.js';
-import getAllUser from '../controllers/get.js';
-import getUserById from '../controllers/get.js';
+import {getAllUser, getUserByEmail, getUserById} from '../controllers/get.js';
 import deleteUserById from '../controllers/delete.js';
 import putUser from '../controllers/put.js';
 
