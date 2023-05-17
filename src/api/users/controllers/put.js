@@ -26,10 +26,10 @@ import { validateUpDateUser } from '../validation/validation.js';
 const putUser = async (request, response) => {
   try{
     const { id } = request.params;
+    const user = await User.findById(id);
     if (!user) {
       return response.status(404).json({message: "User not found"});
     }
-      const user = await User.findById(id);
       const userValidate = validateUpDateUser(request.body);
       if(userValidate.error){
         return response.status(400).json(userValidate.error.details);
