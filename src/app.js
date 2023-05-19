@@ -4,6 +4,7 @@ import { port } from './config/index.js';
 import { setDbConnection } from './config/db.js';
 import router from './router.js';
 import { openApiSpecification } from './config/swagger.js';
+import cors from 'cors';
 
 const app = express();
 
@@ -11,11 +12,16 @@ const app = express();
 setDbConnection();
 
 app.use(express.json());
+app.use(cors());
+
+app.get('/', (request, response, next) => {
+  response.json({message: 'This is CORS-enabled for all origins!'});
+})
 
 app.use('/',router);
 
 app.get('/',(request, response, error) =>{
-   response.send('status: ok')
+  response.send('status: ok')
 })
 
 app.use('/docs', swaggerUi.serve);
