@@ -14,7 +14,7 @@ import User from '../../../models/users.js';
  *    400:
  *     description: Something went wrong
  *    500:
- *     description: UnKwnown Error 
+ *     description: unKwnown error  
  */
 
 /**
@@ -75,7 +75,7 @@ const getAllUser = async (request, response) => {
     return response.status(200).json(user);
     }catch (error){
     console.log(error);
-    response.status(500).json('unKwnown error'); 
+    response.status(500).json('unKnown error'); 
     }
 };
 
