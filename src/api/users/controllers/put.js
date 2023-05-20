@@ -60,7 +60,7 @@ const putUser = async (request, response) => {
       return response.status(200).json(updatedUser);
   }catch(error){
     console.log(error);
-    return response.status(500).json('unKnown error');
+    return response.status(500).json('unknown error');
     }
   }
   
