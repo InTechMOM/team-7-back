@@ -27,7 +27,7 @@ import { validateUpDateUser } from '../validation/validation.js';
  *      404:
  *        description: user not found
  *      500:
- *        description: unKwnown error 
+ *        description: unknown error 
  */
 
 /**
