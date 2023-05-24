@@ -46,7 +46,7 @@ import User from '../../../models/users.js';
  * @openapi 
  *  components:
  *   schemas:
- *    UserRmail:
+ *    UserEmail:
  *     type: object
  *     properties:
  *      email:
@@ -75,7 +75,7 @@ const getAllUser = async (request, response) => {
     return response.status(200).json(user);
     }catch (error){
     console.log(error);
-    response.status(500).json('unKnown error'); 
+    return response.status(500).json('unKnown error'); 
     }
 };
 
