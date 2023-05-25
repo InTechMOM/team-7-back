@@ -1,34 +1,56 @@
 import User from '../../../models/users.js';
 import { validateUpDateUser } from '../validation/validation.js';
+
 /**
  * @openapi
- * /api/users:
+ * /api/users/{id}:
  *  put:
- *    description: Creation API for users
+ *    description: Update user
  *    tags:
  *      - Users
  *    parameters:
- *      - name: name
- *        in: formData
- *        type: string  
- *        required: true
- *      - name: lastname
- *        in: formData
- *        type: string
- *        required: true
+ *     - in: path
+ *       name: id
+ *       schema:
+ *         type: string
+ *       required: true
+ *    requestBody:
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: object
+ *        $ref: '#/components/schemas/UserUpdate'    
  *    responses:
  *      200:
- *        description: User created
- *      400:
- *        description: Bad Request 
+ *        description: user update
+ *      404:
+ *        description: user not found
+ *      500:
+ *        description: unknown error 
+ */
+
+/**
+ * @openapi 
+ *  components:
+ *   schemas:
+ *    UserUpdate:
+ *     type: object
+ *     properties:
+ *      nameFull:
+ *        type: string
+ *     required:
+ *      - nameFull
+ *     example:
+ *      nameFull: Betina Bournissent Vallejo
  */
 
 const putUser = async (request, response) => {
   try{
-    const { id } = request.params;
-    const user = await User.findById(id);
-    if (!user) {
-      return response.status(404).json({message: "User not found"});
+    const id = request.params.id;
+    const userId = await User.findById({_id: id});
+    if (!userId) {
+      return response.status(404).json({message: "user not found"});
     }
       const userValidate = validateUpDateUser(request.body);
       if(userValidate.error){
@@ -36,10 +58,9 @@ const putUser = async (request, response) => {
       }
       const updatedUser = await User.findByIdAndUpdate(id , request.body, { new: true });
       return response.status(200).json(updatedUser);
-  }
-    catch(error){
-      console.log(error);
-      return response.status(500).json('Internal server error');
+  }catch(error){
+    console.log(error);
+    return response.status(500).json('unknown error');
     }
   }
   

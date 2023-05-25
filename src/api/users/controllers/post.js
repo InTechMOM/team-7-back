@@ -5,26 +5,16 @@ import User from '../../../models/users.js';
  * @openapi
  * /api/users:
  *  post:
- *    description: Creation API for users
+ *    description: Creation of users
  *    tags:
  *      - Users
- *    parameters:
- *      - name: name
- *        in: formData
- *        type: string  
- *        required: true
- *      - name: lastName
- *        in: formData
- *        type: string
- *        required: true
- *      - name: email
- *        in: formData
- *        type: string
- *        required: true
- *      - name: rol
- *        in: formData
- *        type: string
- *        required: true    
+ *    requestBody:
+ *     required: true
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: object
+ *        $ref: '#/components/schemas/User'    
  *    responses:
  *      200:
  *        description: User created
@@ -32,12 +22,40 @@ import User from '../../../models/users.js';
  *        description: Bad Request 
  */
 
-
+/**
+ * @openapi 
+ *  components:
+ *   schemas:
+ *    User:
+ *     type: object
+ *     properties:
+ *      nameFull:
+ *        type: string
+ *      email:
+ *        type: string
+ *      rol:
+ *        type: string
+ *     required:
+ *      - nameFull
+ *      - email
+ *      - rol
+ *     example:
+ *      nameFull: Betina Bournissent Vallejo
+ *      email: some@example.com
+ *      rol: student
+ * 
+ */
 const  createUser = async (request, response, error) => {
     try{
       const userValidate = validateNewUser(request.body);
       if(userValidate.error){
           return response.status(400).json(userValidate.error.details);        
+      }
+      //valido que el correo sea unico
+      const email = request.body.email
+      const emailRegistered = await User.findOne({ email });
+      if (emailRegistered) {
+        return response.status(400).json({error:"Email Registered"})
       }
       const newUser = new User({ ...request.body });
       const user = await newUser.save();
@@ -45,8 +63,8 @@ const  createUser = async (request, response, error) => {
     }catch(error){
       console.log(error);
       return response.status(500).json('Internal server error');
-    }
-   }
+    } 
+  }
     
 export default createUser;
 

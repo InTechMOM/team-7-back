@@ -2,13 +2,9 @@ import Joi from 'joi';
 
 function validateNewUser(body){
   const schema = Joi.object({
-    name: Joi.string()
+    nameFull: Joi.string()
         .min(3)
-        .max(30)
-        .required(),
-    lastName: Joi.string()
-        .min(3)
-        .max(30)
+        .max(80)
         .required(),
     email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net']}})
@@ -21,11 +17,7 @@ function validateNewUser(body){
 }
 function validateUpDateUser(body){
     const schema = Joi.object({
-      name: Joi.string()
-          .min(3)
-          .max(30)
-          .required(),
-      lastName: Joi.string()
+      nameFull: Joi.string()
           .min(3)
           .max(30)
           .required(),

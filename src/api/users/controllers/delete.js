@@ -1,20 +1,25 @@
 import User from '../../../models/users.js';
 
 /**
-* @swagger
-* /api/users/{id}:
-*   delete:
-*     description: Return updated delete by Id
-*     tags:
-*      - Users
-*     parameters:
-*       - name: id
-*         in: formDate
-*         type: string
-*         required: true
-*     responses:
-*       200:
-*         description: user delete successful 
+ * @openapi
+ * /api/users/{id}:
+ *  delete:
+ *    description: Delete user for id
+ *    tags:
+ *      - Users
+ *    parameters:
+ *     - in: path
+ *       name: id
+ *       schema:
+ *         type: string
+ *       required: true
+ *    responses:
+ *      200:
+ *        description: user delete
+ *      404:
+ *        description: user not found
+ *      500:
+ *        description: unknown error
 */
 
 const deleteUserById = async (request, response) => {
@@ -22,14 +27,14 @@ const deleteUserById = async (request, response) => {
     const { id } = request.params;
     const user = await User.findById(id);
     if (!user) {
-      return response.status(404).json('user does not exist');
+      return response.status(404).json('user not found');
     }
     const deletedUserById = await User.findByIdAndDelete(id);
     return response.status(200).json(deletedUserById);
   }catch(error){
     console.log(error);
-     return response.status(500).json('Internal server error');
+    return response.status(500).json('unknown error');
   }
   };
 
- export default deleteUserById;
+  export default deleteUserById;
