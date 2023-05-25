@@ -73,20 +73,5 @@ const getAllQualifications = async (request, response) => {
     response.status(500).json('Internal server error'); 
     }
 };
-/*
-const getUserById = async (request, response) => {
-  try{
-    const id = request.params.id;
-    const user = await User.findOne({_id : id});
-      if (!user){
-      return response.status(404).json({message: "Forbidden"});
-    }
-    return response.status(200).json(user);
-    }catch (error){
-     console.log(error);
-     return response.status(500).json('Internal server error'); 
-}
-};
-*/
-//export {getAllUser, getQualificationByEmail, getUserById};
+
 export {getQualificationByEmail, getAllQualifications};
