@@ -12,7 +12,7 @@ function validateNewUser(body){
         .required(),
     email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net']}})
-        .unique(),
+        .required(),
     rol: Joi.string()
         .valid('student','teacher')
         .required(),
