@@ -7,7 +7,8 @@ function validateNewUser(body){
         .max(80)
         .required(),
     email: Joi.string()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net']}}),
+        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net']}})
+        .required(),
     rol: Joi.string()
         .valid('student','teacher')
         .required(),
