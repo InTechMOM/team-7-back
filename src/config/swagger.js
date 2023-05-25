@@ -17,7 +17,6 @@ const swaggerOptions = {
     './src/api/videos/controllers/post.js',
     './src/api/qualifications/controllers/post.js',
     './src/api/qualifications/controllers/get.js',
-    './src/api/qualifications/controllers/delete.js',
     ], //ubicacion de las apis
 };
 
