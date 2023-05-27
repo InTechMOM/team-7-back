@@ -39,7 +39,7 @@ import User from '../../../models/users.js';
  *    422:
  *     description: email not valid
  *    500:
- *     description: unKwnown error 
+ *     description: unknown error 
  */
 
 /**
@@ -90,7 +90,7 @@ const getUserByEmail = async (request, response) => {
     return response.status(200).json(userEmail);
     }catch (error){
   console.log(error);
-  return response.status(500).json('unKwnown error'); 
+  return response.status(500).json('unKnown error'); 
 }
 };
 export {getAllUser, getUserByEmail}; 
