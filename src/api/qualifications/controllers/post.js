@@ -79,7 +79,7 @@ const createQualification = async (request, response, error) => {
       if (!emailValid) {
         return response.status(400).json({error:"email teacher not found"});
       }
-      //valido que elvudeo este cargado en la DB
+      //valido que el video este cargado en la DB
       const url = request.body.url
       const urlValid = await Video.findOne({ url });
       if(!urlValid){

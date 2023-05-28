@@ -9,13 +9,13 @@ import Video from '../../../models/videos.js';
    *     tags:
    *      - Qualifications
    *     parameters:
-   *      - name: id
+   *      - name: emailTeacher
    *        in: formData
    *        type: string  
    *        required: true
    *     responses:
    *       200:
-   *         description: users
+   *         description: Videos for teacher
    *       404:
    *         description: User not found
    *       500:
@@ -39,14 +39,17 @@ import Video from '../../../models/videos.js';
 
 const getQualificationByEmail = async (request, response) => {
   try{
-    //se valida que el mail 
+    //se valida  el mail del profesor
     const {emailTeacher} = request.params.emailTeacher;
-    console.log(emailTeacher);
-    const video = await Video.findOne(emailTeacher);
-      if(!video){
-      return response.status(404).json({message: "teacher without graded videos "});
+    const filter ={
+      ...emailTeacher && {emailTeacher}
     }
-    return response.status(200).json(video);
+    console.log(filter);
+    const qualification = await Qualification.findOne(filter);
+      if(!filter){
+      return response.status(404).json({message: "There are no videos registered for the indicated user"});
+    }
+    return response.status(200).json(qualification);
     }catch (error){
     console.log(error);
     return response.status(500).json('unknown error'); 
