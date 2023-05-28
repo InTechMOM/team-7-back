@@ -85,11 +85,12 @@ const getAllVideo = async (request, response) => {
 const getVideoByEmailTeacher = async (request, response) => {
   try{
     const emailTeacher = request.params.emailTeacher;
-    const userEmail = await Video.find({emailTeacher});
+    const userEmail = await Video.findOne({emailTeacher});
+    console.log(userEmail.url)
       if (!userEmail){
       return response.status(422).json({message: "email not valid"});
     }
-    return response.status(200).json(userEmail);
+    return response.status(200).json(userEmail.url);
     }catch (error){
   console.log(error);
   return response.status(500).json('unknown error'); 
